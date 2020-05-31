@@ -383,6 +383,7 @@ void highLevel()
 		}
 	}
 	list.show();
+	std::cout << "Tail: " << list.tail;
 }
 
 int main()
