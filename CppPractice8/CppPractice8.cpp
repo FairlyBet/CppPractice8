@@ -258,13 +258,12 @@ struct DoubleConnectedList
 	Node* head = nullptr, * tail = nullptr;
 	size_t count = 0;
 
-	void insert(int value)
+	void add(int value)
 	{
 		if (!head)
 		{
 			head = new Node();
 			head->value = value;
-			count++;
 		}
 		else if (!tail)
 		{
@@ -272,7 +271,6 @@ struct DoubleConnectedList
 			tail->value = value;
 			head->next = tail;
 			tail->prev = head;
-			count++;
 		}
 		else
 		{
@@ -280,11 +278,11 @@ struct DoubleConnectedList
 			tail->next->value = value;
 			tail->next->prev = tail;
 			tail = tail->next;
-			count++;
 		}
+		count++;
 	}
 
-	void insert_at(int value, size_t num)
+	void insert(int value, size_t num)
 	{
 		if (num < count && num >= 0)
 		{
@@ -320,7 +318,7 @@ struct DoubleConnectedList
 			count++;
 		}
 		else if (num == count)
-			insert(value);
+			add(value);
 	}
 
 	Node* get_element(size_t num)
@@ -369,16 +367,17 @@ struct DoubleConnectedList
 void highLevel()
 {
 	DoubleConnectedList list;
-	list.insert(1);
-	list.insert(2);
-	list.insert(2);
-	list.insert(1);
-	list.insert(1);
+	list.add(1);
+	list.add(2);
+	list.add(2);
+	list.add(1);
+	list.add(1);
+	list.show();
 	for (size_t i = 0; i < list.count; i++)
 	{
 		if (list.get_element(i)->value % 2 != 0)
 		{
-			list.insert_at(list.get_element(i)->value, i + 1);
+			list.insert(list.get_element(i)->value, i + 1);
 			i++;
 		}
 	}
